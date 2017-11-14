@@ -1,9 +1,9 @@
-export const store = {
+export const STORE_DATA = {
   date: '20171001',
   total: 300
 };
 
-export const events = [
+export const EVENTS_DATA = [
   {
     date: '20171114',
     event: 'Påfyllt',
