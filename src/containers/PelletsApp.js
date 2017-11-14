@@ -6,26 +6,34 @@ import { STORE_DATA, EVENTS_DATA } from '../data';
 class PelletsApp extends Component {
   constructor(props) {
     super(props);
-
-    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      events: EVENTS_DATA,
+      store: STORE_DATA
+    };
+    this.onAddNewEvent = this.onAddNewEvent.bind(this);
   }
-  onSubmit(e) {
+
+  /**
+   * Passed from PelletsInputForm when submiting form
+   * @param {*} e
+   */
+  onAddNewEvent(e) {
     console.log(e);
-    e.preventDefault();
+    this.setState({ events: [...this.state.events, e] });
   }
   render() {
-    return <PelletsAppView storedata={STORE_DATA} eventsdata={EVENTS_DATA} onsubmit={this.onSubmit} />;
+    return <PelletsAppView storedata={this.state.store} eventsdata={this.state.events} onaddnewevent={this.onAddNewEvent} />;
   }
 }
 
 export default PelletsApp;
 
 const PelletsAppView = props => {
-  const { storedata, eventsdata, onsubmit } = props;
+  const { storedata, eventsdata, onaddnewevent } = props;
   return (
     <div>
       <PelletsOverview data={storedata} />
-      <PelletsInput onsubmit={onsubmit} />
+      <PelletsInputForm onaddnewevent={onaddnewevent} />
       <PelletsEvents data={eventsdata} />
     </div>
   );
@@ -81,34 +89,64 @@ const getTodaysDate = () => {
   return today; //(today = mm + '/' + dd + '/' + yyyy);
 };
 
-const PelletsInput = props => {
-  const { onsubmit } = props;
-  return (
-    <Form inline onSubmit={onsubmit}>
-      <FormGroup style={{ margin: 10 }}>
-        <Label for="date">Datum:</Label>
-        <Input type="date" name="date" id="date" defaultValue={getTodaysDate()} />
-      </FormGroup>
-      <FormGroup style={{ margin: 10 }}>
-        <Label for="event">Event:</Label>
-        <Input type="select" name="date" id="event" defaultValue="Sotat">
-          <option>Sotat</option>
-          <option>Beställt</option>
-          <option>Fyllt</option>
-          <option>Lånat</option>
-          <option>Åter</option>
-        </Input>
-      </FormGroup>
-      <FormGroup style={{ margin: 10 }}>
-        <Label fro="message">Meddelande:</Label>
-        <Input name="message" id="message" />
-      </FormGroup>
-      <Button>Lägg till</Button>
-    </Form>
-  );
-};
+class PelletsInputForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: getTodaysDate(),
+      event: 'Sotat',
+      message: ''
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onaddnewevent(this.state);
+  }
+
+  render() {
+    return (
+      <Form inline onSubmit={this.handleSubmit}>
+        <FormGroup style={{ margin: 10 }}>
+          <Label for="date">Datum:</Label>
+          <Input type="date" name="date" id="date" onChange={this.handleInputChange} value={this.state.date} />
+        </FormGroup>
+        <FormGroup style={{ margin: 10 }}>
+          <Label for="event">Event:</Label>
+          <Input type="select" name="date" id="event" onChange={this.handleInputChange} value={this.state.event}>
+            <option>Sotat</option>
+            <option>Beställt</option>
+            <option>Fyllt</option>
+            <option>Lånat</option>
+            <option>Åter</option>
+          </Input>
+        </FormGroup>
+        <FormGroup style={{ margin: 10 }}>
+          <Label fro="message">Meddelande:</Label>
+          <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
+        </FormGroup>
+        <Button>Lägg till</Button>
+      </Form>
+    );
+  }
+}
 
 const PelletsEvents = props => {
+  const { data } = props;
+  let counter = 1;
   return (
     <Card>
       <Table>
@@ -121,9 +159,9 @@ const PelletsEvents = props => {
           </tr>
         </thead>
         <tbody>
-          <PelletsEventsItem id="1" date="20171001" event="Påfyllt" message="25" />
-          <PelletsEventsItem id="2" date="20171011" event="Sotat" message="" />
-          <PelletsEventsItem id="3" date="20171201" event="Beställt" message="3 pallar" />
+          {data.map(event => {
+            return <PelletsEventsItem key={event.date} id={counter++} date={event.date} event={event.event} message={event.message} />;
+          })}
         </tbody>
       </Table>
     </Card>
