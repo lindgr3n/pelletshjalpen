@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import PelletsApp from './containers/PelletsApp';
+
 class App extends Component {
   render() {
     return (
@@ -11,8 +13,8 @@ class App extends Component {
           <h1>Pelletshjälpen</h1>
           <div>Profile</div>
         </header>
-        <div>
-          <div></div>
+        <div className="content">
+          <PelletsApp />
         </div>
       </div>
     );
