@@ -1,39 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreator';
 
 import PelletsOverview from './PelletsOverview';
 import PelletsInputForm from './PelletsInputForm';
 import PelletsEvents from './PelletsEvents';
 
 // Mock data
-import { STORE_DATA, EVENTS_DATA } from '../data';
+// import { STORE_DATA, EVENTS_DATA } from '../data';
 
-class PelletsApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      events: EVENTS_DATA,
-      overviewdata: STORE_DATA
-    };
-    this.onAddNewEvent = this.onAddNewEvent.bind(this);
-  }
-
-  /**
-   * Passed from PelletsInputForm when submiting form
-   * @param {*} e
-   */
-  onAddNewEvent(e) {
-    e = Object.assign({}, e, { id: this.state.events.length + 1 });
-    this.setState({ events: [e, ...this.state.events] });
-  }
+export class PelletsApp extends Component {
   render() {
     return (
       <div>
-        <PelletsOverview data={this.state.overviewdata} />
-        <PelletsInputForm onaddnewevent={this.onAddNewEvent} />
-        <PelletsEvents data={this.state.events} />
+        <PelletsOverview data={this.props.overviewdata} />
+        <PelletsInputForm onaddnewevent={this.props.addEventItem} />
+        <PelletsEvents data={this.props.events} />
       </div>
     );
   }
 }
 
-export default PelletsApp;
+PelletsApp.propTypes = {
+  overviewdata: PropTypes.object,
+  addEventItem: PropTypes.func,
+  events: PropTypes.array
+};
+
+const mapStateToProps = state => {
+  return {
+    events: state.events,
+    overviewdata: state.overviewdata
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(actionCreators, dispatch);
+};
+
+const PelletsAppContainer = connect(mapStateToProps, mapDispatchToProps)(PelletsApp);
+
+export default PelletsAppContainer;
