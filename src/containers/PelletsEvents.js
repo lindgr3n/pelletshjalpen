@@ -16,8 +16,8 @@ const PelletsEvents = props => {
           </tr>
         </thead>
         <tbody>
-          {data.map(event => {
-            return <PelletsEventsItem key={event.id} date={event.date} event={event.event} message={event.message} />;
+          {data.map((event, i) => {
+            return <PelletsEventsItem key={i} date={event.date} event={event.event} message={event.message} />;
           })}
         </tbody>
       </Table>
