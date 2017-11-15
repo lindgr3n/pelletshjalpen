@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import PelletsAppView from './PelletsAppView';
+import PelletsOverview from './PelletsOverview';
+import PelletsInputForm from './PelletsInputForm';
+import PelletsEvents from './PelletsEvents';
 
 // Mock data
 import { STORE_DATA, EVENTS_DATA } from '../data';
@@ -24,7 +26,13 @@ class PelletsApp extends Component {
     this.setState({ events: [e, ...this.state.events] });
   }
   render() {
-    return <PelletsAppView storedata={this.state.store} eventsdata={this.state.events} onaddnewevent={this.onAddNewEvent} />;
+    return (
+      <div>
+        <PelletsOverview data={this.state.store} />
+        <PelletsInputForm onaddnewevent={this.onAddNewEvent} />
+        <PelletsEvents data={this.state.events} />
+      </div>
+    );
   }
 }
 
