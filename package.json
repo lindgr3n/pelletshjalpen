@@ -6,8 +6,10 @@
     "bootstrap": "4.0.0-beta.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.17",
-    "reactstrap": "next"
+    "reactstrap": "next",
+    "redux": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
