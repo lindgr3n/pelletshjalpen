@@ -31,9 +31,9 @@ class PelletsInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onaddnewevent(this.props);
-
-    this.setState(INITIAL_STATE);
+    this.props.onaddnewevent(this.state);
+    // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
+    this.setState(INITIAL_STATE); // Should you use form.reset() instead?
   }
 
   render() {
@@ -41,11 +41,11 @@ class PelletsInputForm extends Component {
       <Form inline onSubmit={this.handleSubmit}>
         <FormGroup style={{ margin: 10 }}>
           <Label for="date">Datum:</Label>
-          <Input type="date" name="date" id="date" onChange={this.handleInputChange} value={this.props.date} />
+          <Input type="date" name="date" id="date" onChange={this.handleInputChange} value={this.state.date} />
         </FormGroup>
         <FormGroup style={{ margin: 10 }}>
           <Label for="event">Event:</Label>
-          <Input type="select" name="event" id="event" onChange={this.handleInputChange} value={this.props.event}>
+          <Input type="select" name="event" id="event" onChange={this.handleInputChange} value={this.state.event}>
             <option>Sotat</option>
             <option>Beställt</option>
             <option>Fyllt</option>
@@ -55,7 +55,7 @@ class PelletsInputForm extends Component {
         </FormGroup>
         <FormGroup style={{ margin: 10 }}>
           <Label fro="message">Meddelande:</Label>
-          <Input name="message" id="message" onChange={this.handleInputChange} value={this.props.message} />
+          <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
         </FormGroup>
         <Button>Lägg till</Button>
       </Form>
