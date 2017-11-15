@@ -19,7 +19,8 @@ class PelletsApp extends Component {
    */
   onAddNewEvent(e) {
     console.log(e);
-    this.setState({ events: [...this.state.events, e] });
+    e = Object.assign({}, e, { id: this.state.events.length + 1 });
+    this.setState({ events: [e, ...this.state.events] });
   }
   render() {
     return <PelletsAppView storedata={this.state.store} eventsdata={this.state.events} onaddnewevent={this.onAddNewEvent} />;
@@ -89,10 +90,22 @@ const getTodaysDate = () => {
   return today; //(today = mm + '/' + dd + '/' + yyyy);
 };
 
+const parseDateTo = date => {
+  if (date.indexOf('-') !== -1) {
+    return date;
+  }
+  const dateYear = date.substring(0, 4);
+  const dateMonth = date.substring(4, 6);
+  const dateDay = date.substring(6);
+
+  return `${dateYear}-${dateMonth}-${dateDay}`;
+};
+
 class PelletsInputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       date: getTodaysDate(),
       event: 'Sotat',
       message: ''
@@ -126,7 +139,7 @@ class PelletsInputForm extends Component {
         </FormGroup>
         <FormGroup style={{ margin: 10 }}>
           <Label for="event">Event:</Label>
-          <Input type="select" name="date" id="event" onChange={this.handleInputChange} value={this.state.event}>
+          <Input type="select" name="event" id="event" onChange={this.handleInputChange} value={this.state.event}>
             <option>Sotat</option>
             <option>Beställt</option>
             <option>Fyllt</option>
@@ -160,7 +173,7 @@ const PelletsEvents = props => {
         </thead>
         <tbody>
           {data.map(event => {
-            return <PelletsEventsItem key={event.date} id={counter++} date={event.date} event={event.event} message={event.message} />;
+            return <PelletsEventsItem key={event.id} id={counter++} date={event.date} event={event.event} message={event.message} />;
           })}
         </tbody>
       </Table>
@@ -173,7 +186,7 @@ const PelletsEventsItem = props => {
   return (
     <tr>
       <th scope="row">{id}</th>
-      <td>{date}</td>
+      <td>{parseDateTo(date)}</td>
       <td>{event}</td>
       <td>{message}</td>
     </tr>
