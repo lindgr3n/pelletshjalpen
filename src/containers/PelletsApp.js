@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardBody, Col, Row, CardTitle, CardText, Table, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import { STORE_DATA, EVENTS_DATA } from '../data';
@@ -40,6 +41,12 @@ const PelletsAppView = props => {
   );
 };
 
+PelletsAppView.propTypes = {
+  storedata: PropTypes.object.isRequired,
+  eventsdata: PropTypes.arrayOf(PropTypes.object),
+  onaddnewevent: PropTypes.func
+};
+
 const PelletsOverview = props => {
   const { data } = props;
   return (
@@ -63,6 +70,10 @@ const PelletsOverview = props => {
   );
 };
 
+PelletsOverview.propTypes = {
+  data: PropTypes.object
+};
+
 const PelletsOverviewItem = props => {
   const { text, value } = props;
   return (
@@ -71,6 +82,11 @@ const PelletsOverviewItem = props => {
       <CardText>{value}</CardText>
     </Card>
   );
+};
+
+PelletsOverviewItem.propTypes = {
+  text: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 const getTodaysDate = () => {
@@ -157,6 +173,10 @@ class PelletsInputForm extends Component {
   }
 }
 
+PelletsInputForm.propTypes = {
+  onaddnewevent: PropTypes.func
+};
+
 const PelletsEvents = props => {
   const { data } = props;
   let counter = 1;
@@ -181,6 +201,10 @@ const PelletsEvents = props => {
   );
 };
 
+PelletsEvents.propTypes = {
+  data: PropTypes.array
+};
+
 const PelletsEventsItem = props => {
   const { id, date, event, message } = props;
   return (
@@ -191,4 +215,11 @@ const PelletsEventsItem = props => {
       <td>{message}</td>
     </tr>
   );
+};
+
+PelletsEventsItem.propTypes = {
+  id: PropTypes.number,
+  date: PropTypes.string,
+  event: PropTypes.string,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
