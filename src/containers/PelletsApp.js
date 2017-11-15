@@ -12,7 +12,7 @@ class PelletsApp extends Component {
     super(props);
     this.state = {
       events: EVENTS_DATA,
-      store: STORE_DATA
+      overviewdata: STORE_DATA
     };
     this.onAddNewEvent = this.onAddNewEvent.bind(this);
   }
@@ -28,7 +28,7 @@ class PelletsApp extends Component {
   render() {
     return (
       <div>
-        <PelletsOverview data={this.state.store} />
+        <PelletsOverview data={this.state.overviewdata} />
         <PelletsInputForm onaddnewevent={this.onAddNewEvent} />
         <PelletsEvents data={this.state.events} />
       </div>
