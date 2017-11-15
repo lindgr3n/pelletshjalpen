@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { getTodaysDate } from '../utils';
 
+const INITIAL_STATE = {
+  id: '',
+  date: getTodaysDate(),
+  event: 'Sotat',
+  message: ''
+};
+
 class PelletsInputForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: '',
-      date: getTodaysDate(),
-      event: 'Sotat',
-      message: ''
-    };
+    this.state = INITIAL_STATE;
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +32,8 @@ class PelletsInputForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onaddnewevent(this.state);
+
+    this.setState(INITIAL_STATE);
   }
 
   render() {
