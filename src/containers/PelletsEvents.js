@@ -5,13 +5,11 @@ import { parseDateTo } from '../utils';
 
 const PelletsEvents = props => {
   const { data } = props;
-  let counter = 1;
   return (
     <Card>
       <Table>
         <thead>
           <tr>
-            <th>#</th>
             <th>Datum</th>
             <th>Event</th>
             <th>Meddelande</th>
@@ -19,7 +17,7 @@ const PelletsEvents = props => {
         </thead>
         <tbody>
           {data.map(event => {
-            return <PelletsEventsItem key={event.id} id={counter++} date={event.date} event={event.event} message={event.message} />;
+            return <PelletsEventsItem key={event.id} date={event.date} event={event.event} message={event.message} />;
           })}
         </tbody>
       </Table>
@@ -34,10 +32,9 @@ PelletsEvents.propTypes = {
 export default PelletsEvents;
 
 const PelletsEventsItem = props => {
-  const { id, date, event, message } = props;
+  const { date, event, message } = props;
   return (
     <tr>
-      <th scope="row">{id}</th>
       <td>{parseDateTo(date)}</td>
       <td>{event}</td>
       <td>{message}</td>
