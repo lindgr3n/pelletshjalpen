@@ -8,7 +8,9 @@ const INITIAL_STATE = {
   date: getTodaysDate(),
   event: 'Sotat',
   eventaction: 'EVENT_SOTAT',
-  message: ''
+  message: '',
+  value: 0,
+  isNumber: false
 };
 
 class PelletsInputForm extends Component {
@@ -26,8 +28,10 @@ class PelletsInputForm extends Component {
     const name = target.name;
     if (target.type === 'select-one') {
       const eventAction = target.selectedOptions[0].attributes['tag'].value;
+      const isNumber = eventAction === 'EVENT_SOTAT' ? false : true;
       this.setState({
-        eventaction: eventAction
+        eventaction: eventAction,
+        isNumber: isNumber
       });
     }
     this.setState({
@@ -37,6 +41,7 @@ class PelletsInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.props.onaddnewevent(this.state);
 
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
@@ -62,10 +67,17 @@ class PelletsInputForm extends Component {
             <option tag="EVENT_RETURN">Åter</option>
           </Input>
         </FormGroup>
-        <FormGroup style={{ margin: 10 }}>
-          <Label fro="message">Meddelande:</Label>
-          <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
-        </FormGroup>
+        {this.state.isNumber ? (
+          <FormGroup style={{ margin: 10 }}>
+            <Label fro="value">Antal:</Label>
+            <Input type="number" name="value" id="value" valid={this.state.value !== 0} onChange={this.handleInputChange} value={this.state.value} />
+          </FormGroup>
+        ) : (
+          <FormGroup style={{ margin: 10 }}>
+            <Label fro="message">Meddelande:</Label>
+            <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
+          </FormGroup>
+        )}
         <Button color="primary">Lägg till</Button>
       </Form>
     );
