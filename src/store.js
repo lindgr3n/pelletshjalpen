@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 
 // Get reducers
 import { events } from './reducers/events';
@@ -13,6 +13,8 @@ const defaultState = {
 
 // Can test the redux by using in chrome devtools -> react when selecting Provider
 // $r.store.dispatch({type: 'EVENT_ADD_ITEM', data: {id: 5, date: '20171115', event: 'Sotat', message:''}})
-const store = createStore(events, defaultState);
+
+const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
+const store = createStore(events, defaultState, enhancers);
 
 export default store;
