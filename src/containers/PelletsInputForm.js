@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   id: '',
   date: getTodaysDate(),
   event: 'Sotat',
+  eventaction: 'EVENT_SOTAT',
   message: ''
 };
 
@@ -23,7 +24,12 @@ class PelletsInputForm extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
+    if (target.type === 'select-one') {
+      const eventAction = target.selectedOptions[0].attributes['tag'].value;
+      this.setState({
+        eventaction: eventAction
+      });
+    }
     this.setState({
       [name]: value
     });
@@ -32,10 +38,13 @@ class PelletsInputForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.onaddnewevent(this.state);
+
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
     this.setState(INITIAL_STATE); // Should you use form.reset() instead?
   }
 
+  // TODO: When selecting sotat show textinput
+  // TODO: WHen selecting rest show numberinput
   render() {
     return (
       <Form inline onSubmit={this.handleSubmit}>
@@ -46,11 +55,11 @@ class PelletsInputForm extends Component {
         <FormGroup style={{ margin: 10 }}>
           <Label for="event">Event:</Label>
           <Input type="select" name="event" id="event" onChange={this.handleInputChange} value={this.state.event}>
-            <option>Sotat</option>
-            <option>Beställt</option>
-            <option>Fyllt</option>
-            <option>Lånat</option>
-            <option>Åter</option>
+            <option tag="EVENT_SOTAT">Sotat</option>
+            <option tag="EVENT_BUY">Köpt</option>
+            <option tag="EVENT_FILL">Fyllt</option>
+            <option tag="EVENT_BORROW">Lånat</option>
+            <option tag="EVENT_RETURN">Åter</option>
           </Input>
         </FormGroup>
         <FormGroup style={{ margin: 10 }}>
