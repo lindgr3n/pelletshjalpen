@@ -57,7 +57,7 @@ class PelletsInputForm extends Component {
           <Label fro="message">Meddelande:</Label>
           <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
         </FormGroup>
-        <Button>Lägg till</Button>
+        <Button color="primary">Lägg till</Button>
       </Form>
     );
   }
