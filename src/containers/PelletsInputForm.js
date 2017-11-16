@@ -73,11 +73,12 @@ class PelletsInputForm extends Component {
             <Input type="number" name="value" id="value" valid={this.state.value !== 0} onChange={this.handleInputChange} value={this.state.value} />
           </FormGroup>
         ) : (
-          <FormGroup style={{ margin: 10 }}>
-            <Label fro="message">Meddelande:</Label>
-            <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
-          </FormGroup>
+          ''
         )}
+        <FormGroup style={{ margin: 10 }}>
+          <Label fro="message">Meddelande:</Label>
+          <Input name="message" id="message" onChange={this.handleInputChange} value={this.state.message} />
+        </FormGroup>
         <Button color="primary">Lägg till</Button>
       </Form>
     );
