@@ -22,6 +22,6 @@ export const EVENTS_DATA = [
     date: '20171001',
     event: 'Köpt',
     value: 156,
-    message: ''
+    message: 'SCA'
   }
 ];
