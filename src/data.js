@@ -1,6 +1,6 @@
 export const STORE_DATA = {
   date: '20171001',
-  total: 300
+  total: 131
 };
 
 export const EVENTS_DATA = [
@@ -19,7 +19,7 @@ export const EVENTS_DATA = [
   {
     id: 3,
     date: '20171001',
-    event: 'Beställt',
-    message: '3 pallar'
+    event: 'Köpt',
+    message: '156'
   }
 ];
