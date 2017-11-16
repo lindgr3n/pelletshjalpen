@@ -13,10 +13,10 @@ class App extends Component {
         <div className="App">
           <header className="App-header ">
             <p style={{ width: '33%' }} className="text-left float-left">
-              <span className="align-middle">logo</span>
+              <span>logo</span>
             </p>
             <p style={{ width: '33%' }} className="text-center float-left">
-              Pelletshjälpen
+              <h3>Pelletshjälpen</h3>
             </p>
             <p style={{ width: '33%' }} className="text-right float-left">
               Profile
