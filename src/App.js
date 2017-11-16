@@ -11,10 +11,16 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <header className="App-header">
-            <div>logo</div>
-            <h1>Pelletshjälpen</h1>
-            <div>Profile</div>
+          <header className="App-header ">
+            <p style={{ width: '33%' }} className="text-left float-left">
+              <span className="align-middle">logo</span>
+            </p>
+            <p style={{ width: '33%' }} className="text-center float-left">
+              Pelletshjälpen
+            </p>
+            <p style={{ width: '33%' }} className="text-right float-left">
+              Profile
+            </p>
           </header>
           <div className="content">
             <PelletsApp />
