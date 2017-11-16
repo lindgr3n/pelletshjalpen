@@ -1,7 +1,7 @@
 import { createStore, compose } from 'redux';
 
 // Get reducers
-import { events } from './reducers/events';
+import rootReducer from './reducers';
 
 // Get inital data
 import { EVENTS_DATA, STORE_DATA } from './data';
@@ -15,6 +15,6 @@ const defaultState = {
 // $r.store.dispatch({type: 'EVENT_ADD_ITEM', data: {id: 5, date: '20171115', event: 'Sotat', message:''}})
 
 const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
-const store = createStore(events, defaultState, enhancers);
+const store = createStore(rootReducer, defaultState, enhancers);
 
 export default store;
