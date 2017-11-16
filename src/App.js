@@ -16,7 +16,7 @@ class App extends Component {
               <span>logo</span>
             </p>
             <p style={{ width: '33%' }} className="text-center float-left">
-              <h3>Pelletshjälpen</h3>
+              Pelletshjälpen
             </p>
             <p style={{ width: '33%' }} className="text-right float-left">
               Profile
