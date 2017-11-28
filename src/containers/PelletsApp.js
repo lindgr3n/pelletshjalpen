@@ -17,7 +17,7 @@ export class PelletsApp extends Component {
     return (
       <div>
         <PelletsOverview data={this.props.overviewdata} />
-        <PelletsInputForm onaddnewevent={this.props.addEventItem} />
+        <PelletsInputForm />
         <PelletsEvents data={this.props.events} />
       </div>
     );

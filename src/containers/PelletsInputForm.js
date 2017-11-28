@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { getTodaysDate } from '../utils';
+import * as actionCreators from '../actions/actionCreator';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const INITIAL_STATE = {
   id: '',
@@ -42,8 +45,8 @@ class PelletsInputForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.onaddnewevent(this.state);
-
+    // this.props.onaddnewevent(this.state);
+    this.props.addEventItem(this.state);
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
     this.setState(INITIAL_STATE); // Should you use form.reset() instead?
   }
@@ -89,7 +92,17 @@ PelletsInputForm.propTypes = {
   date: PropTypes.string,
   event: PropTypes.string,
   message: PropTypes.string,
-  onaddnewevent: PropTypes.func
+  addEventItem: PropTypes.func
 };
 
-export default PelletsInputForm;
+// export default PelletsInputForm;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(actionCreators, dispatch);
+};
+
+const PelletsInputFormContainer = connect(mapStateToProps, mapDispatchToProps)(PelletsInputForm);
+
+export default PelletsInputFormContainer;
