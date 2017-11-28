@@ -1,4 +1,5 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 // Get reducers
 import rootReducer from './reducers';
@@ -15,6 +16,6 @@ const defaultState = {
 // $r.store.dispatch({type: 'EVENT_ADD_ITEM', data: {id: 5, date: '20171115', event: 'Sotat', message:''}})
 
 const enhancers = compose(window.devToolsExtension ? window.devToolsExtension() : f => f);
-const store = createStore(rootReducer, defaultState, enhancers);
+const store = createStore(rootReducer, defaultState, applyMiddleware(thunk));
 
 export default store;
