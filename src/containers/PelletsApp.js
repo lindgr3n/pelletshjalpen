@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { bindActionCreators } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreator';
 
 import PelletsOverview from './PelletsOverview';
 import PelletsInputForm from './PelletsInputForm';
 import PelletsEvents from './PelletsEvents';
+import { firebaseConnect } from 'react-redux-firebase';
 
 // Mock data
 // import { STORE_DATA, EVENTS_DATA } from '../data';
@@ -32,7 +33,7 @@ PelletsApp.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    events: state.events,
+    events: state.firebase.data.events,
     overviewdata: state.overviewdata
   };
 };
@@ -41,6 +42,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(actionCreators, dispatch);
 };
 
-const PelletsAppContainer = connect(mapStateToProps, mapDispatchToProps)(PelletsApp);
+const PelletsAppWrapper = compose(firebaseConnect(['events']), connect(mapStateToProps, mapDispatchToProps))(PelletsApp);
+// const PelletsAppContainer = connect(mapStateToProps, mapDispatchToProps)(PelletsApp);
 
-export default PelletsAppContainer;
+export default PelletsAppWrapper; //PelletsAppContainer;

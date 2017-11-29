@@ -1,9 +1,7 @@
 // Initialize Firebase
 import * as firebase from 'firebase';
 
-import eventModel from './models/event';
-
-let defaultConfig = {
+export let defaultConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: 'pelletshjalpen.firebaseapp.com',
   databaseURL: 'https://pelletshjalpen.firebaseio.com',
@@ -12,25 +10,12 @@ let defaultConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDERID
 };
 
-let database;
-
 export const init = (config = defaultConfig) => {
   firebase.initializeApp(config);
-  if (!database) {
-    database = firebase.database();
-  }
-  return database;
+
+  return firebase;
 };
 
-export const getEvents = () => {
-  return database.ref('/').once('value');
-};
+firebase.initializeApp(defaultConfig);
 
-export const addNewEvent = (id, date, event, value, message) => {
-  let key = database.ref('/events').push().key;
-  let model = eventModel(id, date, event, value, message);
-  return database.ref('/events/' + key).set(model);
-};
-
-// const fire = firebase.initializeApp(config);
-// export default fire;
+export default firebase;
