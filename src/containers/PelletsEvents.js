@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Table } from 'reactstrap';
 import { parseDateTo } from '../utils';
+import { isLoaded } from 'react-redux-firebase';
 
 const PelletsEvents = props => {
   const { data } = props;
+  if (!isLoaded(data)) {
+    return <div>Loading!!!</div>;
+  }
   return (
     <Card>
       <Table>
@@ -17,8 +21,8 @@ const PelletsEvents = props => {
           </tr>
         </thead>
         <tbody>
-          {data.map((event, i) => {
-            return <PelletsEventsItem key={i} date={event.date} event={event.event} value={event.value} message={event.message} />;
+          {Object.keys(data).map((key, i) => {
+            return <PelletsEventsItem key={i} date={data[key].date} event={data[key].event} value={data[key].value} message={data[key].message} />;
           })}
         </tbody>
       </Table>
