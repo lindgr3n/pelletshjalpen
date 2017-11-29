@@ -6,7 +6,7 @@
   message: ''
 } */
 
-export default (id, date, event, value, message) => {
+export const eventItem = (id, date, event, value, message) => {
   return {
     id,
     date,
