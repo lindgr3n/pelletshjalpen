@@ -5,6 +5,7 @@ import { getTodaysDate } from '../utils';
 import * as actionCreators from '../actions/actionCreator';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { eventItem } from '../models/event';
 
 const INITIAL_STATE = {
   id: '',
@@ -45,8 +46,10 @@ class PelletsInputForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    // this.props.onaddnewevent(this.state);
-    this.props.addEventItem(this.state);
+    // Destructure here or should you send this.state and make the destructuring inside the event.
+    const { id, date, event, value, message } = this.state;
+    const data = eventItem(id, date, event, value, message);
+    this.props.addEventItem(data);
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
     this.setState(INITIAL_STATE); // Should you use form.reset() instead?
   }

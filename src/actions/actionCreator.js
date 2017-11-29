@@ -1,7 +1,10 @@
-export const addEventItem = data => {
-  return dispatch => {
-    console.log('Time to call firebase!');
+import { getFirebase } from 'react-redux-firebase';
 
+export const addEventItem = data => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+    console.log('Push to firebase: ', { data });
+    firebase.push('events', data);
     dispatch(addEventItemAction(data));
   };
 };
