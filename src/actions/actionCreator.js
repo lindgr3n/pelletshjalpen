@@ -1,8 +1,8 @@
 export const addEventItem = data => {
-  return (dispatch, getState, getFirebase) => {
+  return async (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
     console.log('Push to firebase: ', { data });
-    firebase.push('events', data);
+    await firebase.push('events', data).key;
     dispatch(addEventItemAction(data));
   };
 };
