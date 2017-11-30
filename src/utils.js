@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const parseDateTo = date => {
   if (date.indexOf('-') !== -1) {
     return date;
@@ -24,4 +26,14 @@ export const getTodaysDate = () => {
   }
   today = `${yyyy}-${mm}-${dd}`;
   return today; //(today = mm + '/' + dd + '/' + yyyy);
+};
+
+export const getTimeStamp = date => {
+  const day = moment(date);
+  return day.format('YYYYMMDDhhmmss');
+};
+
+export const getDateFromTimeStamp = date => {
+  const day = moment(date);
+  return day.format('YYYY-MM-DD');
 };
