@@ -1,5 +1,3 @@
-import { getFirebase } from 'react-redux-firebase';
-
 export const addEventItem = data => {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
