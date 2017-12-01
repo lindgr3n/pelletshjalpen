@@ -34,6 +34,6 @@ export const getTimeStamp = date => {
 };
 
 export const getDateFromTimeStamp = date => {
-  const day = moment(date);
+  const day = moment(date, 'YYYYMMDDhhmmss');
   return day.format('YYYY-MM-DD');
 };
