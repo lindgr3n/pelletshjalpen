@@ -6,10 +6,10 @@
   message: ''
 } */
 
-export const eventItem = (id, date, event, value, message) => {
+export const eventItem = (id, timestamp, event, value, message) => {
   return {
     id,
-    date,
+    timestamp,
     event,
     value,
     message

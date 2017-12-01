@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { getTodaysDate } from '../utils';
+import { getTodaysDate, getTimeStamp } from '../utils';
 import * as actionCreators from '../actions/actionCreator';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -48,7 +48,8 @@ class PelletsInputForm extends Component {
 
     // Destructure here or should you send this.state and make the destructuring inside the event.
     const { id, date, event, value, message } = this.state;
-    const data = eventItem(id, date, event, value, message);
+
+    const data = eventItem(id, getTimeStamp(date), event, value, message);
     this.props.addEventItem(data);
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
     this.setState(INITIAL_STATE); // Should you use form.reset() instead?
