@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Table } from 'reactstrap';
-import { parseDateTo } from '../utils';
-import { isLoaded } from 'react-redux-firebase';
+import { getDateFromTimeStamp } from '../utils';
+import { isEmpty } from 'react-redux-firebase';
 
 const PelletsEvents = props => {
   const { data } = props;
-  if (!isLoaded(data)) {
+  if (isEmpty(data)) {
     return <div>Loading!!!</div>;
   }
   return (
@@ -22,7 +22,7 @@ const PelletsEvents = props => {
         </thead>
         <tbody>
           {Object.keys(data).map((key, i) => {
-            return <PelletsEventsItem key={i} date={data[key].date} event={data[key].event} value={data[key].value} message={data[key].message} />;
+            return <PelletsEventsItem key={i} timestamp={data[key].timestamp} event={data[key].event} value={data[key].value} message={data[key].message} />;
           })}
         </tbody>
       </Table>
@@ -37,10 +37,10 @@ PelletsEvents.propTypes = {
 export default PelletsEvents;
 
 const PelletsEventsItem = props => {
-  const { date, event, value, message } = props;
+  const { timestamp, event, value, message } = props;
   return (
     <tr>
-      <td>{parseDateTo(date)}</td>
+      <td>{getDateFromTimeStamp(timestamp)}</td>
       <td>{event}</td>
       <td>{value}</td>
       <td>{message}</td>
@@ -50,7 +50,7 @@ const PelletsEventsItem = props => {
 
 PelletsEventsItem.propTypes = {
   id: PropTypes.number,
-  date: PropTypes.string,
+  timestamp: PropTypes.string,
   event: PropTypes.string,
   value: PropTypes.number,
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
