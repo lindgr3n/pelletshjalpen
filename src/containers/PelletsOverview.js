@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, Row, Col, CardTitle, CardText } from 'reactstrap';
+import { isEmpty } from 'react-redux-firebase';
 
 const PelletsOverview = props => {
   const { data } = props;
+  if (isEmpty(data)) {
+    return <div>empty</div>;
+  }
   return (
     <Card className="overview">
       <CardBody>
