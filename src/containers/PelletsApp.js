@@ -33,7 +33,8 @@ export class PelletsApp extends Component {
 PelletsApp.propTypes = {
   overviewdata: PropTypes.object,
   addEventItem: PropTypes.func,
-  events: PropTypes.array
+  events: PropTypes.array,
+  getEvents: PropTypes.func
 };
 
 const mapStateToProps = state => {
