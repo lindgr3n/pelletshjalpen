@@ -1,9 +1,11 @@
-const events = (state = [], action) => {
+const events = (state = {}, action) => {
   console.log('events:', action.type);
   switch (action.type) {
     case 'EVENT_ADD_ITEM':
-      action.data.id = state.length + 1; // Add a new id
-      return [action.data, ...state];
+      return Object.assign({}, action.data, state);
+    case 'EVENT_GET':
+      // Set the values returned from firebase
+      return action.data;
     default:
       break;
   }

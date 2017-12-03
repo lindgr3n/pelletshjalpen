@@ -14,6 +14,11 @@ import { firebaseConnect } from 'react-redux-firebase';
 // import { STORE_DATA, EVENTS_DATA } from '../data';
 
 export class PelletsApp extends Component {
+  constructor(props) {
+    super(props);
+
+    this.props.getEvents();
+  }
   render() {
     return (
       <div>
@@ -43,6 +48,15 @@ const mapDispatchToProps = dispatch => {
 };
 
 const PelletsAppWrapper = compose(firebaseConnect(['events']), connect(mapStateToProps, mapDispatchToProps))(PelletsApp);
+/* const PelletsAppWrapper = compose(
+  firebaseConnect(['events']),
+  connect(
+    state => ({
+      events: state.firebase.data.events
+    }),
+    mapDispatchToProps
+  )
+)(PelletsApp); */
 // const PelletsAppContainer = connect(mapStateToProps, mapDispatchToProps)(PelletsApp);
 
 export default PelletsAppWrapper; //PelletsAppContainer;
