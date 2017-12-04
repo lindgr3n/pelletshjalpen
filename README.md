@@ -1,6 +1,6 @@
 # Pelletshjälpen
 
-Ett litet projekt för träning av redux/firebase!
-Även ett användbart usecase eftersom jag behöver ett sätta att hålla koll på hur mycket pellets jag har hemma och när jag måste sota.
+Simple project for training of redux/firebase!
+Good case also to keep trac on the pellets i use at home and when i need to decarbonize.
 
-Alla bidrag är välkommna. Kanske har du också behov av en liten påminnelseapplikation istället för att använda anteckningar på mobilen!
+All contributions is welcome! Maybe you also have need of a small reminder app instead of using notes on your phone!
