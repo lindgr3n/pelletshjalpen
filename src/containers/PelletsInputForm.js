@@ -34,7 +34,7 @@ class PelletsInputForm extends Component {
       const eventAction = target.selectedOptions[0].attributes['tag'].value;
       const isNumber = eventAction === 'EVENT_SOTAT' ? false : true;
       this.setState({
-        eventaction: eventAction,
+        eventAction: eventAction,
         isNumber: isNumber
       });
     }
@@ -50,6 +50,7 @@ class PelletsInputForm extends Component {
     const { id, date, event, value, message } = this.state;
 
     const data = eventItem(id, getTimeStamp(date), event, value, message);
+    data.eventAction = this.state.eventAction;
     this.props.addEventItem(data);
     // e.target.reset(); // Reset back to defaultvalues? Use defaultValue on <input>?
     this.setState(INITIAL_STATE); // Should you use form.reset() instead?
