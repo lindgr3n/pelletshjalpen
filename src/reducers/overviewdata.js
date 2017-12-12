@@ -2,17 +2,17 @@ export const overviewdata = (state = {}, action) => {
   let total = null;
   switch (action.type) {
     case 'EVENT_ADD_ITEM':
-      switch (action.data.eventaction) {
+      switch (action.data.eventAction) {
         case 'EVENT_SOTAT':
           // TODO: Update last sotat and reminder to next time
           break;
         case 'EVENT_BUY':
           // TOOD: Increase warehouse stock
-          total = state.total + action.data.message;
+          total = parseInt(state.total, 10) + parseInt(action.data.value, 10);
           break;
         case 'EVENT_FILL':
           // TOOD: Decrease warehouse stock
-          total = state.total - action.data.message;
+          total = parseInt(state.total, 10) - parseInt(action.data.value, 10);
           break;
         case 'EVENT_BORROW':
           // TOOD: Increase warehouse stock (Add minus if you lend out)
@@ -26,6 +26,8 @@ export const overviewdata = (state = {}, action) => {
           break;
       }
       return Object.assign({}, state, { total });
+    case 'OVERVIEW_GET':
+      return Object.assign({}, state, action.data);
     default:
       break;
   }
