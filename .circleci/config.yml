@@ -38,8 +38,8 @@ jobs:
           key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
       # run tests!
-      #- run: yarn test
-      - run: CI=true yarn test:coverage
+      - run: CI=true yarn test
+      #- run: CI=true yarn test:coverage
       #- run: yarn reportCoverage
 
       - run: yarn build
