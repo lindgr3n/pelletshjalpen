@@ -13,7 +13,7 @@ const PelletsOverview = props => {
       <CardBody>
         <Row>
           <Col sm="3">
-            <PelletsOverviewItem text="Datum" value={data.date} />
+            <PelletsOverviewItem text="Datum" value={data.timestamp} />
           </Col>
           <Col sm="3">
             <PelletsOverviewItem text="Lager" value={data.total} />
