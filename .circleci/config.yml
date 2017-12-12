@@ -40,9 +40,8 @@ jobs:
       # run tests!
       #- run: yarn test
       - run: CI=true yarn test:coverage
-       - run: yarn reportCoverage
+      #- run: yarn reportCoverage
 
-      - run: yarn global add firebase-tools
       - run: yarn build
       - run: 
           name: Deploy Master to Firebase
