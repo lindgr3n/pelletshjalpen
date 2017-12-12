@@ -18,6 +18,7 @@ export class PelletsApp extends Component {
     super(props);
 
     this.props.getEvents();
+    this.props.getOverViewData();
   }
   render() {
     return (
@@ -33,14 +34,15 @@ export class PelletsApp extends Component {
 PelletsApp.propTypes = {
   overviewdata: PropTypes.object,
   addEventItem: PropTypes.func,
-  events: PropTypes.array,
-  getEvents: PropTypes.func
+  events: PropTypes.object,
+  getEvents: PropTypes.func,
+  getOverViewData: PropTypes.func
 };
 
 const mapStateToProps = state => {
   return {
     events: state.firebase.data.events,
-    overviewdata: state.overviewdata
+    overviewdata: state.firebase.data.overviewdata
   };
 };
 
@@ -48,7 +50,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(actionCreators, dispatch);
 };
 
-const PelletsAppWrapper = compose(firebaseConnect(['events']), connect(mapStateToProps, mapDispatchToProps))(PelletsApp);
+const PelletsAppWrapper = compose(firebaseConnect(['events', 'overviewdata']), connect(mapStateToProps, mapDispatchToProps))(PelletsApp);
 /* const PelletsAppWrapper = compose(
   firebaseConnect(['events']),
   connect(
