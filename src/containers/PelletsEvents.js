@@ -31,7 +31,7 @@ const PelletsEvents = props => {
 };
 
 PelletsEvents.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.object
 };
 
 export default PelletsEvents;
@@ -42,7 +42,7 @@ const PelletsEventsItem = props => {
     <tr>
       <td>{getDateFromTimeStamp(timestamp)}</td>
       <td>{event}</td>
-      <td>{value}</td>
+      <td>{parseInt(value, 10)}</td>
       <td>{message}</td>
     </tr>
   );
@@ -52,6 +52,6 @@ PelletsEventsItem.propTypes = {
   id: PropTypes.number,
   timestamp: PropTypes.string,
   event: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   message: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
