@@ -6,7 +6,12 @@ export const addEventItem = data => {
     // Get data and update
     const { overviewdata } = getState();
     console.log('over', overviewdata);
-    await firebase.update('overviewdata', { timestamp: data.timestamp, total: overviewdata.total - data.value }).key;
+    if (data.eventAction === 'EVENT_BUY') {
+      await firebase.update('overviewdata', { timestamp: data.timestamp, total: parseInt(overviewdata.total, 10) + parseInt(data.value, 10) }).key;
+    }
+    if (data.eventAction === 'EVENT_FILL') {
+      await firebase.update('overviewdata', { timestamp: data.timestamp, total: parseInt(overviewdata.total, 10) - parseInt(data.value, 10) }).key;
+    }
 
     dispatch(addEventItemAction(data));
   };
